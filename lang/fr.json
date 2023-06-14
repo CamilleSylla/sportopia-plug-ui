@@ -1,0 +1,9 @@
+{
+    "admin" : {
+        "nav" : {
+            "dashboard" : "Tableau de bord",
+            "teams": "Équipes",
+            "players": "Joueurs"
+        }
+    }
+}
