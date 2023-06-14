@@ -23,7 +23,7 @@ export default function AdminInfoBadge({
         <Icon className=" p-4"/>
       </span>
       <div>
-        <p className="text-xs font-bold text-violet-500">{label}</p>
+        <p className="text-xs font-semibold text-violet-500">{label}</p>
         <p className=" font-semibold text-2xl text-white">{value}</p>
       </div>
     </div>

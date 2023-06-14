@@ -5,5 +5,30 @@
             "teams": "Équipes",
             "players": "Joueurs"
         }
+    },
+    "signup" : {
+        "title" : "Inscription",
+        "placeholders": {
+            "email" : "spotopia@example.com",
+            "password" : "motdepasse",
+            "confirmPassword" : "motdepasse",
+            "lastname" : "Dupont",
+            "firstname" : "Jean"
+        },
+        "labels" : {
+            "lastname" : "Nom",
+            "firstname" : "Prénom",
+            "email" : "Email",
+            "password" : "Mot de passe",
+            "confirmPassword" : "Confirmer le mot de passe"
+        },
+        "validation": {
+            "required" : "Ce champ est obligatoire",
+            "invalid_email" : "Email invalide",
+            "passwords_dont_match" : "Les mots de passe ne correspondent pas"
+        },
+        "submit" : "S'inscrire",
+        "signup_google": "S'inscrire avec Google"
+
     }
 }
