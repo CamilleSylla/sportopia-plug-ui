@@ -3,8 +3,11 @@ import lang from "../../lang/fr.json";
 import { signIn, useSession } from "next-auth/react";
 import client from "../../apollo-client";
 import { CREATE_USER } from "../mutations/user";
+import { useUserContext } from "@/context/UserContext";
+import { useRouter } from "next/router";
 
 export default function SignUpPage() {
+
   return (
     <div className="flex w-full h-screen">
       <div className="w-1/2 flex justify-center items-center">
@@ -18,7 +21,10 @@ export default function SignUpPage() {
   );
 }
 
-function SignUpForm () {
+function SignUpForm() {
+  const { setUser } = useUserContext();
+  const router = useRouter();
+
   const validate = (values) => {
     const keys = Object.keys(values);
     const errors = {};
@@ -36,6 +42,22 @@ function SignUpForm () {
     return errors;
   };
 
+  const submit = async (values) => {
+    const { confirmPassword, ...user } = values;
+    console.log(user);
+    const { data, errors } = await client.mutate({
+      mutation: CREATE_USER,
+      variables: {
+        user,
+      },
+    });
+    if (errors) {
+      throw errors;
+    }
+    setUser(data)
+    return router.push("/");
+  }
+
   return (
     <Formik
       initialValues={{
@@ -46,19 +68,7 @@ function SignUpForm () {
         confirmPassword: "",
       }}
       validate={validate}
-      onSubmit={async (values) => {
-        const { confirmPassword, ...user } = values;
-        console.log(user);
-        const { data, errors } = await client.mutate({
-          mutation: CREATE_USER,
-          variables: {
-            user
-          }
-        })
-        if (errors) {
-          throw errors;
-        }
-      }}
+      onSubmit={submit}
     >
       {({ isSubmitting }) => (
         <Form className="flex flex-col w-[410px] gap-6">
@@ -181,4 +191,4 @@ function SignUpForm () {
       )}
     </Formik>
   );
-};
+}

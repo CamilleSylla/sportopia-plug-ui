@@ -5,6 +5,7 @@ import client from "../../apollo-client";
 import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
 import ClientOnly from "@/components/ClientOnly";
+import { UserContextProvider } from "@/context/UserContext";
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
@@ -17,13 +18,15 @@ export default function App({
 }: AppProps) {
   return (
     <SessionProvider session={session}>
-      <ApolloProvider client={client}>
-        <ClientOnly>
-          <div className={poppins.className}>
-            <Component {...pageProps} />
-          </div>
-        </ClientOnly>
-      </ApolloProvider>
+      <UserContextProvider>
+        <ApolloProvider client={client}>
+          <ClientOnly>
+            <div className={poppins.className}>
+              <Component {...pageProps} />
+            </div>
+          </ClientOnly>
+        </ApolloProvider>
+      </UserContextProvider>
     </SessionProvider>
   );
 }
