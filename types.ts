@@ -48,6 +48,8 @@ export interface User {
   email: string;
   password: string;
   club: Club[];
+  accessToken: string;
+  refreshToken: string;
 };
 
 export type SignIn = {

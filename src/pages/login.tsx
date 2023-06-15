@@ -51,7 +51,7 @@ function SignInForm() {
     if (errors) {
       throw errors;
     }
-    setUser(data);
+    setUser(data.signIn);
     return router.push("/");
   };
 
@@ -112,4 +112,19 @@ function SignInForm() {
       )}
     </Formik>
   );
+}
+
+
+export async function getServerSideProps({ req }) {
+  if(req.cookies.accessToken) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
 }

@@ -54,7 +54,7 @@ function SignUpForm() {
     if (errors) {
       throw errors;
     }
-    setUser(data)
+    setUser(data.createUser)
     return router.push("/");
   }
 
@@ -191,4 +191,17 @@ function SignUpForm() {
       )}
     </Formik>
   );
+}
+export async function getServerSideProps({ req }) {
+  if(req.cookies.accessToken) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
 }
