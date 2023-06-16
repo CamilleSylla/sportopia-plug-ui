@@ -2,8 +2,41 @@
   "admin": {
     "nav": {
       "dashboard": "Tableau de bord",
+      "club": "Club",
       "teams": "Équipes",
       "players": "Joueurs"
+    }, 
+    "root": {
+      "create_btn" : "Créer un club",
+      "create_page" : {
+        "title" : "Créer un club",
+        "form" : {
+          "validation": {
+            "required": "Ce champ est obligatoire",
+            "invalid_email": "Email invalide",
+            "passwords_dont_match": "Les mots de passe ne correspondent pas"
+          },
+          "labels" : {
+            "name" : "Nom du club *",
+            "adress": "Adresse *",
+            "phone": "N° de téléphone de contact",
+            "email": "Email de contact",
+            "zip": "Code postal *",
+            "city": "Ville *",
+            "sport": "Sport *"
+          },
+          "placeholders"  : {
+            "name": "Le Mans Sarthe Basket", 
+            "adress": "4 Rue de la République",
+            "phone": "06 00 00 00 00",
+            "email": "spotopia@example.com",
+            "zip": "72000",
+            "city": "Le Mans",
+            "sport": "Basket"
+
+          }
+        }
+      }
     }
   },
   "signup": {
@@ -31,6 +64,7 @@
     "signup_google": "S'inscrire avec Google"
   },
   "signin": {
-    "title": "Se connecter"
+    "title": "Se connecter",
+    "submit": "Connexion"
   }
 }

@@ -13,7 +13,7 @@ export default function LoginPage() {
       </div>
       <div
         className="w-1/2 h-full rounded-bl-3xl"
-        style={{ background: "url(/login.jpg)", backgroundSize: "cover" }}
+        style={{ background: "url(/login.png)", backgroundSize: "cover" }}
       ></div>
     </div>
   );
@@ -105,7 +105,7 @@ function SignInForm() {
               type="submit"
               disabled={isSubmitting}
             >
-              {lang.signup.submit}
+              {lang.signin.submit}
             </button>
           </div>
         </Form>

@@ -6,13 +6,16 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const accessToken = localStorage.getItem("accessToken");
-  return {
-    headers: {
-      ...headers,
-      authorization: accessToken ? `Bearer ${accessToken}` : "",
-    },
-  };
+  if (typeof window !== 'undefined' && window.localStorage) {
+    const accessToken = localStorage.getItem("accessToken");
+    return {
+      headers: {
+        ...headers,
+        authorization: accessToken ? `Bearer ${accessToken}` : "",
+      },
+    };
+  }
+  return
 });
 
 const client = new ApolloClient({
