@@ -3,14 +3,14 @@ import { HomeIcon, HomeModernIcon, UserGroupIcon, UsersIcon } from "@heroicons/r
 import AdminNavLink from "../components/AdminNavLink";
 export default function AdminLayout({ children }: {children: React.ReactNode}) {
   return (
-    <div className="flex gap-8">
+    <div className="flex">
       <nav className="w-fit h-screen bg-violet-950">
         <span className="text-2xl uppercase p-14 block font-bold text-white border-b border-b-violet-900">
           Sportopia<span className=" font-extralight">plug</span>
         </span>
         <NavList />
       </nav>
-      <div className=" flex-grow mx-8 mt-20">{children}</div>
+      <div className=" flex-grow p-10 pt-14">{children}</div>
     </div>
   );
 }

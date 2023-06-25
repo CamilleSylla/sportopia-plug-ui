@@ -9,6 +9,7 @@ import Pending from "@/components/Pending";
 import Image from "next/image";
 import { useDate } from "@/components/useDate";
 import { useMemo } from "react";
+import EmptyEntityBlock from "@/components/EmptyEntityBlock";
 
 export default function ClubDashboardPage() {
   const { data, loading } = useQuery(ADMIN_USER_CLUB);
@@ -20,28 +21,57 @@ export default function ClubDashboardPage() {
           <Pending />
         </Then>
         <Else>
-          <div className="space-y-4">
-            <h1 className="font-bold text-4xl">
-              {lang.admin.club.page_title}
-            </h1>
-            <div className="space-x-4 pt-6 pb-1">
-              <AdminInfoBadge iconName="users" label="Joueurs" value="246" />
-              <AdminInfoBadge iconName="team" label="Equipes" value="25" />
-            </div>
-            <If condition={!club}>
-              <Link href="/admin/club/create">
-                {lang.admin.root.create_btn}
-              </Link>
-            </If>
-            <div className="grid grid-cols-6 w-full gap-2">
-              <ClubCard {...club} />
-            </div>
-          </div>
+          <If condition={!club}>
+            <Then>
+              <EmptyEntityBlock
+                message={lang.components.empty_entity_block.club.message}
+                ctaMessage={lang.components.empty_entity_block.club.cta}
+                link="/admin/club/create"
+                icon="team"
+              />
+            </Then>
+            <Else>
+              <div className="space-y-4">
+                <h1 className="font-bold text-4xl">
+                  {lang.admin.club.page_title}
+                </h1>
+                <div className="space-x-4 pt-6 pb-1">
+                  <AdminInfoBadge
+                    iconName="users"
+                    label="Joueurs"
+                    value="246"
+                  />
+                  <AdminInfoBadge iconName="team" label="Equipes" value="25" />
+                </div>
+                <div className="grid grid-cols-6 w-full gap-4">
+                  <ClubCard {...club} />
+                  <TeamsListing teams={club?.teams} />
+                </div>
+              </div>
+            </Else>
+          </If>
         </Else>
       </If>
     </AdminLayout>
   );
 }
+
+const TeamsListing = ({ teams }) => {
+  return (
+    <div className=" col-span-3 bg-violet-950 rounded-md overflow-hidden">
+      <If condition={!teams}>
+        <Then>
+          <EmptyEntityBlock
+            message={lang.components.empty_entity_block.teams.message}
+            ctaMessage={lang.components.empty_entity_block.teams.cta}
+            link="/admin/teams/create"
+            icon="team"
+          />
+        </Then>
+      </If>
+    </div>
+  );
+};
 
 const ClubCard = ({
   logo,
