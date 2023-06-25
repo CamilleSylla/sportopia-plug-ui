@@ -1,9 +1,11 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import lang from "../../lang/fr.json";
-import client from "../../apollo-client";
-import { useUserContext } from "@/context/UserContext";
-import { useRouter } from "next/router";
-import { SIGN_IN } from "../queries/auth";
+import { signIn } from "next-auth/react"
+import { GetServerSidePropsContext } from "next";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]";
+
+
 
 export default function LoginPage() {
   return (
@@ -13,15 +15,13 @@ export default function LoginPage() {
       </div>
       <div
         className="w-1/2 h-full rounded-bl-3xl"
-        style={{ background: "url(/login.jpg)", backgroundSize: "cover" }}
+        style={{ background: "url(/login.png)", backgroundSize: "cover" }}
       ></div>
     </div>
   );
 }
 
 function SignInForm() {
-  const { setUser } = useUserContext();
-  const router = useRouter();
 
   const validate = (values) => {
     const keys = Object.keys(values);
@@ -38,21 +38,8 @@ function SignInForm() {
     return errors;
   };
 
-  const submit = async (values) => {
-    const { data, errors } = await client.query({
-      query: SIGN_IN,
-      variables: {
-        ...values,
-      },
-    });
-
-    console.log(values);
-
-    if (errors) {
-      throw errors;
-    }
-    setUser(data.signIn);
-    return router.push("/");
+  const submit = async (values: { email: string; password: string}) => {
+    signIn('credentials', {...values, callbackUrl: '/'})
   };
 
   return (
@@ -105,7 +92,7 @@ function SignInForm() {
               type="submit"
               disabled={isSubmitting}
             >
-              {lang.signup.submit}
+              {lang.signin.submit}
             </button>
           </div>
         </Form>
@@ -115,14 +102,12 @@ function SignInForm() {
 }
 
 
-export async function getServerSideProps({ req }) {
-  if(req.cookies.accessToken) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await getServerSession(context.req, context.res, authOptions);
+  console.log(session);
+  
+  if (session) {
+    return { redirect: { destination: "/" } };
   }
   return {
     props: {},

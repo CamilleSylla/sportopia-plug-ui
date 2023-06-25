@@ -47,7 +47,7 @@ export interface User {
   lastname: string;
   email: string;
   password: string;
-  club: Club[];
+  club: {id: string, name: string};
   accessToken: string;
   refreshToken: string;
 };

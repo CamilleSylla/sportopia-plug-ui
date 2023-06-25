@@ -9,6 +9,10 @@ export const SIGN_IN = gql`
       email
       accessToken
       refreshToken
+      club {
+        id
+        name
+      }
     }
   }
 `;

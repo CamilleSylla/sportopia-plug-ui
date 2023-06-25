@@ -1,5 +1,5 @@
 import lang from "../../lang/fr.json";
-import { HomeIcon, UserGroupIcon, UsersIcon } from "@heroicons/react/24/solid";
+import { HomeIcon, HomeModernIcon, UserGroupIcon, UsersIcon } from "@heroicons/react/24/solid";
 import AdminNavLink from "../components/AdminNavLink";
 export default function AdminLayout({ children }: {children: React.ReactNode}) {
   return (
@@ -10,7 +10,7 @@ export default function AdminLayout({ children }: {children: React.ReactNode}) {
         </span>
         <NavList />
       </nav>
-      <div className=" flex-grow">{children}</div>
+      <div className=" flex-grow mx-8 mt-20">{children}</div>
     </div>
   );
 }
@@ -21,6 +21,11 @@ const NavList = () => {
       name: lang.admin.nav.dashboard,
       href: "/admin/dashboard",
       icon: HomeIcon,
+    },
+    {
+      name: lang.admin.nav.club,
+      href: "/admin/club",
+      icon: HomeModernIcon,
     },
     {
       name: lang.admin.nav.teams,
