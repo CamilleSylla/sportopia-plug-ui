@@ -4,7 +4,7 @@ import lang from "../../../../lang/fr.json";
 import Link from "next/link";
 import { ADMIN_USER_CLUB } from "../../../queries/admin/club";
 import { useQuery } from "@apollo/client";
-import { If, Else } from "react-if";
+import { If, Else, Then } from "react-if";
 import Pending from "@/components/Pending";
 import Image from "next/image";
 import { useDate } from "@/components/useDate";
@@ -16,23 +16,29 @@ export default function ClubDashboardPage() {
   return (
     <AdminLayout>
       <If condition={loading}>
-        <Pending />
+        <Then>
+          <Pending />
+        </Then>
+        <Else>
+          <div className="space-y-4">
+            <h1 className="font-bold text-4xl">
+              {lang.admin.club.page_title}
+            </h1>
+            <div className="space-x-4 pt-6 pb-1">
+              <AdminInfoBadge iconName="users" label="Joueurs" value="246" />
+              <AdminInfoBadge iconName="team" label="Equipes" value="25" />
+            </div>
+            <If condition={!club}>
+              <Link href="/admin/club/create">
+                {lang.admin.root.create_btn}
+              </Link>
+            </If>
+            <div className="grid grid-cols-6 w-full gap-2">
+              <ClubCard {...club} />
+            </div>
+          </div>
+        </Else>
       </If>
-      <Else>
-        <div className="space-y-4">
-          <h1 className="font-bold text-4xl mb-6">{lang.admin.club.page_title}</h1>
-          <div className="space-x-4">
-            <AdminInfoBadge iconName="users" label="Joueurs" value="246" />
-            <AdminInfoBadge iconName="team" label="Equipes" value="25" />
-          </div>
-          <If condition={!club}>
-            <Link href="/admin/club/create">{lang.admin.root.create_btn}</Link>
-          </If>
-          <div className="grid grid-cols-6 w-full gap-2">
-            <ClubCard {...club} />
-          </div>
-        </div>
-      </Else>
     </AdminLayout>
   );
 }
@@ -49,10 +55,11 @@ const ClubCard = ({
   createdAt: string;
 }) => {
   const { litteralDate } = useDate();
-  const clubCreation = useMemo(
-    () => litteralDate(new Date(createdAt)),
-    [createdAt]
-  );
+  const clubCreation = useMemo(() => {
+    if (createdAt) {
+      return litteralDate(new Date(createdAt));
+    }
+  }, [createdAt]);
   return (
     <article className="col-span-2 flex flex-col bg-violet-950 p-4 rounded-md">
       <div

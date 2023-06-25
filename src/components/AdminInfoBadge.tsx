@@ -18,7 +18,7 @@ export default function AdminInfoBadge({
     return icons[iconName];
   }, []);
   return (
-    <div className="w-fit min-w-[250px] h-fit bg-violet-950 rounded-2xl px-4 py-2 text-white items-center gap-4 inline-flex">
+    <div className="w-fit min-w-[243px] h-fit bg-violet-950 rounded-md px-4 py-2 text-white items-center gap-4 inline-flex">
       <span className=" w-14 h-14 bg-indigo-900 rounded-full flex items-center justify-center">
         <Icon className=" p-4"/>
       </span>
