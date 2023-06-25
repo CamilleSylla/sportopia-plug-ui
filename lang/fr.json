@@ -1,4 +1,16 @@
 {
+  "components": {
+    "empty_entity_block": {
+      "club": {
+        "message": "Vous n'avez pas de club",
+        "cta" : "Créer un club"
+      },
+      "teams" : {
+        "message": "Vous n'avez pas encore d'équipe dans votre club",
+        "cta" : "Créer une équipe"
+      }
+    }
+  },
   "admin": {
     "nav": {
       "dashboard": "Tableau de bord",

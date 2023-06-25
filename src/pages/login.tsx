@@ -88,7 +88,7 @@ function SignInForm() {
           </div>
           <div className="space-y-1 w-full">
             <button
-              className="bg-violet-800 px-6 py-4 rounded-xl w-full"
+              className="bg-violet-800 px-6 py-4 rounded-md w-full"
               type="submit"
               disabled={isSubmitting}
             >
