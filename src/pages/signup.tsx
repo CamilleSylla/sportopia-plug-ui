@@ -3,7 +3,6 @@ import lang from "../../lang/fr.json";
 import { signIn, useSession } from "next-auth/react";
 import client from "../../apollo-client";
 import { CREATE_USER } from "../mutations/user";
-import { useUserContext } from "@/context/UserContext";
 import { useRouter } from "next/router";
 
 export default function SignUpPage() {
@@ -22,7 +21,6 @@ export default function SignUpPage() {
 }
 
 function SignUpForm() {
-  const { setUser } = useUserContext();
   const router = useRouter();
 
   const validate = (values) => {
@@ -44,7 +42,6 @@ function SignUpForm() {
 
   const submit = async (values) => {
     const { confirmPassword, ...user } = values;
-    console.log(user);
     const { data, errors } = await client.mutate({
       mutation: CREATE_USER,
       variables: {
@@ -54,7 +51,6 @@ function SignUpForm() {
     if (errors) {
       throw errors;
     }
-    setUser(data.createUser)
     return router.push("/");
   }
 

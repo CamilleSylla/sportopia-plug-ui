@@ -18,7 +18,6 @@ export default function App({
 }: AppProps) {
   return (
     <SessionProvider session={session}>
-      <UserContextProvider>
         <ApolloProvider client={client}>
           <ClientOnly>
             <div className={poppins.className}>
@@ -26,7 +25,6 @@ export default function App({
             </div>
           </ClientOnly>
         </ApolloProvider>
-      </UserContextProvider>
     </SessionProvider>
   );
 }
