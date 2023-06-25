@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply text-white
+}
 
 @-webkit-keyframes rotating /* Safari and Chrome */ {
     from {

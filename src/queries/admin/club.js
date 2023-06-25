@@ -10,6 +10,7 @@ export const ADMIN_USER_CLUB = gql`
       zip
       email
       phone
+      createdAt
       sport {
         name
       }

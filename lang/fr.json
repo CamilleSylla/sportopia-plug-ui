@@ -37,6 +37,12 @@
           }
         }
       }
+    },
+    "club": {
+      "page_title" : "Club",
+      "club_card" : {
+        "member_since" : "Membre depuis le"
+      }
     }
   },
   "signup": {
